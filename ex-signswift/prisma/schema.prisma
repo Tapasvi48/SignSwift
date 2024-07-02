@@ -1,0 +1,207 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int          @id @default(autoincrement())
+  name          String?
+  customerId    String?      @unique
+  email         String       @unique
+  emailVerified DateTime?
+  password      String?
+  source        String?
+  signature     String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @default(now()) @updatedAt
+  lastSignedIn  DateTime     @default(now())
+  roles         Role[]       @default([USER])
+  url           String?      @unique
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  userProfile   UserProfile?
+
+  @@index([email])
+}
+
+model UserProfile {
+  id   Int     @id
+  bio  String?
+  User User    @relation(fields: [id], references: [id], onDelete: Cascade)
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       Int
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Document {
+  id          Int            @id @default(autoincrement())
+  userId      String
+  title       String?
+  status      DocumentStatus @default(DRAFT)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @default(now()) @updatedAt
+  completedAt DateTime?
+  ShareLink   String
+  signnumber  Int?           @default(0)
+  Active      Boolean        @default(true)
+  Expiration  DateTime?
+  isOrder     Boolean        @default(false)
+  Field       Field[]
+  Recipient   Recipient[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+model Recipient {
+  id            Int           @id @default(autoincrement())
+  documentId    Int?
+  templateId    Int?
+  email         String        @db.VarChar(255)
+  name          String        @default("") @db.VarChar(255)
+  token         String
+  expired       DateTime?
+  signedAt      DateTime?
+  role          RecipientRole @default(SIGNER)
+  readStatus    ReadStatus    @default(NOT_OPENED)
+  signingStatus SigningStatus @default(NOT_SIGNED)
+  sendStatus    SendStatus    @default(NOT_SENT)
+  signnumber    Int           @default(0)
+  Field         Field[]
+  Document      Document?     @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  Signature     Signature[]
+
+  @@unique([documentId, email])
+  @@unique([templateId, email])
+  @@index([documentId])
+  @@index([templateId])
+  @@index([token])
+}
+
+model Field {
+  id          Int        @id @default(autoincrement())
+  secondaryId String     @unique @default(cuid())
+  documentId  Int?
+  recipientId Int?
+  page        Int
+  width       Decimal    @default(-1)
+  height      Decimal    @default(-1)
+  left        Decimal    @default(0)
+  text        String
+  top         Decimal    @default(0)
+  Document    Document?  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  Recipient   Recipient? @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+  Signature   Signature?
+
+  @@index([documentId])
+  @@index([recipientId])
+}
+
+model Signature {
+  id                     Int       @id @default(autoincrement())
+  created                DateTime  @default(now())
+  recipientId            Int
+  fieldId                Int       @unique
+  signatureImageAsBase64 String?
+  typedSignature         String?
+  Field                  Field     @relation(fields: [fieldId], references: [id])
+  Recipient              Recipient @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+
+  @@index([recipientId])
+}
+
+model DocumentShareLink {
+  id         Int      @id @default(autoincrement())
+  email      String
+  slug       String   @unique
+  documentId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([documentId, email])
+}
+
+model File {
+  id           String   @id @default(uuid())
+  bucket       String
+  fileName     String   @unique
+  originalName String
+  createdAt    DateTime @default(now())
+  size         Int
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum DocumentStatus {
+  DRAFT
+  PENDING
+  COMPLETED
+}
+
+enum DocumentDataType {
+  S3_PATH
+  BYTES
+  BYTES_64
+}
+
+enum ReadStatus {
+  NOT_OPENED
+  OPENED
+}
+
+enum SendStatus {
+  NOT_SENT
+  SENT
+}
+
+enum SigningStatus {
+  NOT_SIGNED
+  SIGNED
+}
+
+enum RecipientRole {
+  CC
+  SIGNER
+  VIEWER
+  APPROVER
+}
+
+enum FieldType {
+  SIGNATURE
+  FREE_SIGNATURE
+  NAME
+  EMAIL
+  DATE
+  TEXT
+}
