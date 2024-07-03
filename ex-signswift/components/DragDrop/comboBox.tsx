@@ -52,7 +52,7 @@ export function ComboBox({
       console.log("step3 renderer");
       setLoading(true);
       const result = await axios.post(
-        "http://localhost:3000/api/document/getreceptient",
+        "https://sign-swift-two.vercel.app/api/document/getreceptient",
         { docId }
       );
       const receptientres = result?.data;

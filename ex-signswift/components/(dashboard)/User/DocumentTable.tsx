@@ -68,7 +68,7 @@ export function DocumentTable({
       return (
         <div className="inline-flex items-center justify-center rounded-md text-sm font-medium">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="hhttps://sign-swift-two.vercel.app0/svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -89,7 +89,7 @@ export function DocumentTable({
       return (
         <div className="inline-flex items-center justify-center rounded-md text-sm font-medium">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="hhttps://sign-swift-two.vercel.app0/svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -113,7 +113,7 @@ export function DocumentTable({
           <svg
             className="w-6 h-6 text-white"
             aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="hhttps://sign-swift-two.vercel.app0/svg"
             width="24"
             height="24"
             fill="none"
@@ -139,7 +139,7 @@ export function DocumentTable({
       return (
         <div className="inline-flex items-center justify-center rounded-md text-sm font-medium">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="hhttps://sign-swift-two.vercel.app0/svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -198,9 +198,9 @@ export function DocumentTable({
   };
   const actionStatusUrl = (link: any, role: any) => {
     if (link.status === "DRAFT") {
-      return `http://localhost:3000/user/${id}/document/${link.id}/step1`;
+      return `https://sign-swift-two.vercel.app/user/${id}/document/${link.id}/step1`;
     } else if (link.status === "SIGN" && role === "SIGNER") {
-      return `http://localhost:3000/user/${id}/signdoc/${link.id}`;
+      return `https://sign-swift-two.vercel.app/user/${id}/signdoc/${link.id}`;
     } else if (link.status === "SIGN" && role === "VIEWER") {
       return link.ShareLink;
     } else if (link.status === "PENDING") {
@@ -256,7 +256,7 @@ export function DocumentTable({
       if (id && email) {
         await axios
           .post(
-            "http://localhost:3000/api/document/getDocumentForUser",
+            "http://https://sign-swift-two.vercel.app/api/document/getDocumentForUser",
             { userId: id, email: email }
             //pending
             //why parse user id

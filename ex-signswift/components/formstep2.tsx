@@ -91,7 +91,7 @@ export default function Step2({
         receptient[index].signnumber = order[index];
       }
       const response = await axios.post(
-        "http://localhost:3000/api/document/addreceptient",
+        "https://sign-swift-two.vercel.app/api/document/addreceptient",
         { docId, recipient: receptient }
       );
       console.log(response.data, "heell");
@@ -147,7 +147,7 @@ export default function Step2({
   const handleRemoveRecepient = async (id: number) => {
     console.log("recepitn to remove is ", id);
     const response = await axios.delete(
-      `http://localhost:3000/api/document/deleteRecepient/${id}`
+      `https://sign-swift-two.vercel.app/api/document/deleteRecepient/${id}`
     );
     if (response.data.success) {
       console.log("added succes");
