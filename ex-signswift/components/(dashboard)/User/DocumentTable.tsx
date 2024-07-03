@@ -256,7 +256,7 @@ export function DocumentTable({
       if (id && email) {
         await axios
           .post(
-            "http://https://sign-swift-two.vercel.app/api/document/getDocumentForUser",
+            "https://sign-swift-two.vercel.app/api/document/getDocumentForUser",
             { userId: id, email: email }
             //pending
             //why parse user id
