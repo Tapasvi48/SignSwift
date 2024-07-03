@@ -10,7 +10,7 @@ export const s3Client = new Minio.Client({
     process.env.S3_ACCESS_KEY === undefined ? "" : process.env.S3_ACCESS_KEY,
   secretKey:
     process.env.S3_SECRET_KEY === undefined ? "" : process.env.S3_SECRET_KEY,
-  useSSL: false,
+  useSSL: true,
 });
 console.log(s3Client, "dev is minio");
 
