@@ -69,7 +69,6 @@ export function ComboboxDemo() {
                 </AvatarFallback>
               </Avatar>
               <div className="text-sm">
-                <p>Dev Gupta</p>
                 <p className="text-[0.78rem] text-gray-300">Personal Acount</p>
               </div>
             </div>

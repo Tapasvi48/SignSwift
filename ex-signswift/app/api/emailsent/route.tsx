@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
         </p>
         <p>
           Best regards,<br>
-          ExSquared
+          SignSwift
         </p>
       </div>
     `, // Using the message from the request body

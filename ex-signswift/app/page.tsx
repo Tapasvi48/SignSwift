@@ -9,7 +9,6 @@ import axios from "axios";
 export default async function Home() {
   const session: Session | null = await getServerSession(config);
 
-  console.log("dev", session);
   // const router = useRouter();
   if (!session) {
     redirect("/login");

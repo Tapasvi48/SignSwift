@@ -4,12 +4,14 @@ import path from "node:path";
 
 export async function signDoc(signatures) {
   const pdfBuffer = new SignPDF(
-    path.resolve(
-      "/Users/tapasviarora/EXSignSwift/ex-signswift/components/PdfSign/sow2.pdf"
-    ),
-    path.resolve(
-      "/Users/tapasviarora/EXSignSwift/ex-signswift/components/PdfSign/certificate.p12"
-    ),
+    path
+      .resolve
+      //
+      (),
+    path
+      .resolve
+      //
+      (),
     signatures
   );
 

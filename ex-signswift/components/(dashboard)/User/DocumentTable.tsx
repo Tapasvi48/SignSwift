@@ -281,7 +281,7 @@ export function DocumentTable({
   }, [id, email]);
 
   const router = useRouter();
-  console.log(signedData, "signed", "dev", data);
+
   const getRandomColor = () => {
     const colors = [
       "#2ECC71", // Emerald Green

@@ -169,11 +169,10 @@
 //     });
 
 //     // const pdfFilePath =
-//     //   "C:/Users/dgupta/Desktop/hrtech/EXSignSwift/ex-signswift/components/PdfSign/sow2.pdf";
+
 //     // fs.writeFileSync(pdfFilePath, pdfBytes2);
 //     // console.log(pdfFilePath, "dnddnd");
-//     // fs.writeFileSync(
-//     //   "C:/Users/dgupta/Desktop/hrtech/EXSignSwift/ex-signswift/components/PdfSign/sow2.pdf",
+//     // fs.writeFileSync(ex-signswift/components/PdfSign/sow2.pdf",
 //     //   pdfBytes2
 //     // );
 //     // const res = await edgestore.publicFiles.upload({
@@ -198,7 +197,7 @@
 
 //     var mailOptions = {
 //       from: process.env.SMTP_MAIL,
-//       to: [user2?.email, "guptadev265@gmail.com", "guptadev545@gmail.com"],
+
 //       subject: "check_multiple in main",
 //       // react: <Welcome />
 //       // html: emailHtml,
@@ -497,7 +496,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
       const mailOptions2 = {
         from: process.env.SMTP_MAIL,
-        to: [user2.email || "guptadev265@gmail.com"],
+        to: [user2.email || "tapasviarora2002@gmail.com"],
         subject: "user signed alert",
         html: `<h3>Your document is signed by ${recipientEmail}</h3>`,
       };
@@ -518,7 +517,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       return Response.json({
         status: 200,
         recipientemail: recipientEmail,
-        reply_to: user2?.email || "guptadev265@gmail.com",
+        reply_to: user2?.email || "tapasviarora2002@gmail.com",
         signedbyone: true,
       });
     }

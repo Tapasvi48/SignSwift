@@ -21,7 +21,6 @@ export default async function RootLayout({
     // redirect(`/login`);
     redirect("/login");
   } else {
-    console.log(session?.user, "user archit");
     return (
       <div className=" ">
         <nav>

@@ -27,18 +27,18 @@ export const Ex2Email = (props: { subject: string; email_body: string }) => (
             src={`${baseUrl}/ex_logo.png`}
             width="100"
             height="100"
-            alt="ExSquared"
+            alt="SignSwift"
           />
           <Hr style={hr} />
           <Text style={paragraph}>
-            Thank you check for applying at ExSquared. We are glad to offer you
+            Thank you check for applying at SignSwift. We are glad to offer you
             an internship at our organization.
           </Text>
 
           <Text>{props.subject}</Text>
           <Text>{props.email_body}</Text>
           <Section style={btnSection}>
-            <Text>Ex Squared Has send you a document to review and Sign</Text>
+            <Text>signswift Has send you a document to review and Sign</Text>
             <Button style={button} href="https://dashboard.stripe.com/login">
               Open the Document
             </Button>
